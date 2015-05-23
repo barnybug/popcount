@@ -46,9 +46,21 @@ TEXT ·Fast64(SB),$0
 
 // func PopCnt32(i uint32) uint8
 // Using POPCNT instruction, nehalem and later
+// See: 
+// http://www.felixcloutier.com/x86/POPCNT.html
+// http://wiki.osdev.org/X86-64_Instruction_Encoding#Registers  
 TEXT ·PopCnt32(SB),$0
     MOVL i+0(FP), BP        // i
     BYTE $0xF3; BYTE $0x0F; BYTE $0xB8; BYTE $0xdd  // POPCNT BX, BP
     // BX<-BP = 11011101 = 0xdd
     MOVL BX, toReturn+8(FP) // Store result.
+    RET                     // return
+
+// func PopCnt64(i uint64) uint8
+TEXT ·PopCnt64(SB),$0
+    MOVQ i+0(FP), BP        // i
+    BYTE $0xF3; BYTE $0x48; BYTE $0x0F; BYTE $0xB8; BYTE $0xdd  // POPCNT RBX, RBP
+    // 01001000 = 0x48
+    // BX<-BP = 11011101 = 0xdd
+    MOVQ BX, toReturn+8(FP) // Store result.
     RET                     // return

@@ -120,6 +120,14 @@ func BenchmarkPopCnt32(b *testing.B) {
 	benchmarkImpl32(b, PopCnt32)
 }
 
+func TestPopCnt64(t *testing.T) {
+	testImpl64(t, PopCnt64)
+}
+
+func BenchmarkPopCnt64(b *testing.B) {
+	benchmarkImpl64(b, PopCnt64)
+}
+
 func TestFast64(t *testing.T) {
 	testImpl64(t, Fast64)
 }

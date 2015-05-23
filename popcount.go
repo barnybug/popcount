@@ -34,6 +34,7 @@ func Hamming64(i uint64) uint8 {
 func Fast32(i uint32) uint8
 func Fast64(i uint64) uint8
 func PopCnt32(i uint32) uint8
+func PopCnt64(i uint64) uint8
 
 var btable [1 << 8]byte
 
